@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <app-search-bar @searchTermChange="onTermChange"></app-search-bar>
-    <app-video-list></app-video-list>
-    {{ videos.length }}
+    <app-video-list :videos="videosArr"></app-video-list>
   </div>
 </template>
 
@@ -20,7 +19,7 @@ export default {
   },
   data() {
     return {
-      videos: [],
+      videosArr: [],
     };
   },
   methods: {
@@ -35,7 +34,7 @@ export default {
           },
         })
         .then((res) => {
-          this.videos = res.data.items;
+          this.videosArr = res.data.items;
         });
     },
   },
