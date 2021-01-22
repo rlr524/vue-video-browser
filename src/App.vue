@@ -1,19 +1,27 @@
 <template>
   <div id="app">
     <app-search-bar @searchTermChange="onTermChange"></app-search-bar>
-    <h1>Hello, Madison!</h1>
+    <app-video-list></app-video-list>
+    {{ videos.length }}
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import SearchBar from "@/components/SearchBar.vue";
+import VideoList from "@/components/VideoList.vue";
 const apiKey = process.env.VUE_APP_API_KEY;
 
 export default {
   name: "App",
   components: {
     appSearchBar: SearchBar,
+    appVideoList: VideoList,
+  },
+  data() {
+    return {
+      videos: [],
+    };
   },
   methods: {
     onTermChange(searchTerm) {
@@ -26,7 +34,9 @@ export default {
             q: searchTerm,
           },
         })
-        .then((res) => console.log(res));
+        .then((res) => {
+          this.videos = res.data.items;
+        });
     },
   },
 };

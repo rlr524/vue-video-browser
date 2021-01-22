@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="searchbar">
     <input @input="onInput" />
   </div>
 </template>
